@@ -1,9 +1,9 @@
 package bootstrap
 
 import (
+	"dew-backend/server/bootstrap/routers"
+	"dew-backend/server/handlers"
 	"net/http"
-	"tradesignal-backend/server/bootstrap/routers"
-	"tradesignal-backend/server/handlers"
 
 	"github.com/gofiber/fiber/v2"
 )

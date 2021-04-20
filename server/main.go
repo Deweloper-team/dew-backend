@@ -1,14 +1,14 @@
 package main
 
 import (
+	conf "dew-backend/config"
+	"dew-backend/pkg/str"
+	"dew-backend/server/bootstrap"
+	"dew-backend/server/middlewares"
+	"dew-backend/usecase"
 	"log"
 	"net/http"
 	"time"
-	conf "tradesignal-backend/config"
-	"tradesignal-backend/pkg/str"
-	"tradesignal-backend/server/bootstrap"
-	"tradesignal-backend/server/middlewares"
-	"tradesignal-backend/usecase"
 
 	"github.com/go-playground/locales/en"
 	"github.com/go-playground/locales/id"
@@ -40,7 +40,6 @@ func main() {
 		log.Fatal(err.Error())
 	}
 	defer configs.DB.Close()
-	defer configs.DBMS.Close()
 
 	// init validation driver
 	validatorInit(&configs)
@@ -55,22 +54,13 @@ func main() {
 		ReqID:       xid.New().String(),
 		EnvConfig:   configs.EnvConfig,
 		DB:          configs.DB,
-		DBMS:        configs.DBMS,
 		RedisClient: configs.RedisClient,
 		JweCred:     configs.JweCred,
 		Validate:    validatorDriver,
 		Translator:  translator,
 		JwtCred:     configs.JwtCred,
-		Minio:       configs.Minio,
 		Aes:         configs.Aes,
-		AesMansek:   configs.AesMansek,
-		AesFront:    configs.AesFront,
-		Firestore:   configs.Firestore,
-		Mandrill:    configs.Mandrill,
-		Recaptcha:   configs.Recaptcha,
-		Mail:        configs.Mail,
-		Mailing:     configs.Mailing,
-		Mansekum:    configs.Mansekum,
+		// Minio:       configs.Minio,
 	}
 
 	boot := bootstrap.Bootstrap{

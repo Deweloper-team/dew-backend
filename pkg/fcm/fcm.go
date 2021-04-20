@@ -1,7 +1,7 @@
 package fcm
 
 import (
-	"tradesignal-backend/pkg/interfacepkg"
+	"dew-backend/pkg/interfacepkg"
 
 	"github.com/maddevsio/fcm"
 )

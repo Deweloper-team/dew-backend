@@ -1,12 +1,12 @@
 package usecase
 
 import (
+	"dew-backend/pkg/logruslogger"
+	"dew-backend/pkg/minio"
+	"dew-backend/usecase/viewmodel"
 	"mime/multipart"
 	"os"
 	"strings"
-	"tradesignal-backend/pkg/logruslogger"
-	"tradesignal-backend/pkg/minio"
-	"tradesignal-backend/usecase/viewmodel"
 )
 
 // MinioUC ...

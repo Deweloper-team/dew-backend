@@ -2,11 +2,11 @@ package handlers
 
 import (
 	"context"
+	"dew-backend/pkg/str"
+	"dew-backend/server/requests"
+	"dew-backend/usecase"
 	"net/http"
 	"time"
-	"tradesignal-backend/pkg/str"
-	"tradesignal-backend/server/requests"
-	"tradesignal-backend/usecase"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"

@@ -2,11 +2,11 @@ package mandrill
 
 import (
 	"bytes"
+	"dew-backend/pkg/file"
 	"encoding/json"
 	"errors"
 	"io/ioutil"
 	"net/http"
-	"tradesignal-backend/pkg/file"
 
 	"github.com/keighl/mandrill"
 )

@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"tradesignal-backend/pkg/file"
-	"tradesignal-backend/pkg/logruslogger"
+	"dew-backend/pkg/file"
+	"dew-backend/pkg/logruslogger"
 )
 
 // FileDownloadUC ...

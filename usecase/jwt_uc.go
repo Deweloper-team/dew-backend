@@ -3,9 +3,9 @@ package usecase
 import (
 	"context"
 	"errors"
-	"tradesignal-backend/helper"
-	"tradesignal-backend/pkg/logruslogger"
-	"tradesignal-backend/usecase/viewmodel"
+	"dew-backend/helper"
+	"dew-backend/pkg/logruslogger"
+	"dew-backend/usecase/viewmodel"
 
 	"github.com/rs/xid"
 )

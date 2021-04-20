@@ -2,15 +2,15 @@ package handlers
 
 import (
 	"database/sql"
+	"dew-backend/pkg/jwe"
+	"dew-backend/pkg/responsedto"
+	"dew-backend/pkg/str"
+	"dew-backend/usecase"
+	"dew-backend/usecase/viewmodel"
 	"fmt"
 	"go/types"
 	"net/http"
 	"strings"
-	"tradesignal-backend/pkg/jwe"
-	"tradesignal-backend/pkg/responsedto"
-	"tradesignal-backend/pkg/str"
-	"tradesignal-backend/usecase"
-	"tradesignal-backend/usecase/viewmodel"
 
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"

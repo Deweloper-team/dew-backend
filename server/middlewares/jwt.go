@@ -1,18 +1,18 @@
 package middlewares
 
 import (
+	"dew-backend/helper"
+	"dew-backend/pkg/functioncaller"
+	"dew-backend/pkg/interfacepkg"
+	"dew-backend/pkg/logruslogger"
+	"dew-backend/server/handlers"
+	"dew-backend/usecase"
 	"encoding/base64"
 	"errors"
 	"fmt"
 	"net/http"
 	"strings"
 	"time"
-	"tradesignal-backend/helper"
-	"tradesignal-backend/pkg/functioncaller"
-	"tradesignal-backend/pkg/interfacepkg"
-	"tradesignal-backend/pkg/logruslogger"
-	"tradesignal-backend/server/handlers"
-	"tradesignal-backend/usecase"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gofiber/fiber/v2"

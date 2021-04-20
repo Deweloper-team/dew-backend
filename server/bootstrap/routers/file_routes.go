@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"tradesignal-backend/server/handlers"
-	"tradesignal-backend/server/middlewares"
+	"dew-backend/server/handlers"
+	"dew-backend/server/middlewares"
 
 	"github.com/gofiber/fiber/v2"
 )

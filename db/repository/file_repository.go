@@ -2,9 +2,9 @@ package repository
 
 import (
 	"database/sql"
+	"dew-backend/db/repository/models"
+	"dew-backend/usecase/viewmodel"
 	"time"
-	"tradesignal-backend/db/repository/models"
-	"tradesignal-backend/usecase/viewmodel"
 )
 
 // IFile ...

@@ -1,11 +1,11 @@
 package amqpconsumer
 
 import (
+	"dew-backend/usecase"
 	"errors"
 	"fmt"
 	"log"
 	"time"
-	"tradesignal-backend/usecase"
 
 	"github.com/streadway/amqp"
 )

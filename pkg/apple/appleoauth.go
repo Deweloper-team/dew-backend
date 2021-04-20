@@ -5,6 +5,7 @@ import (
 	"crypto/ecdsa"
 	"crypto/rsa"
 	"crypto/x509"
+	"dew-backend/pkg/interfacepkg"
 	"encoding/base64"
 	"encoding/json"
 	"encoding/pem"
@@ -15,7 +16,6 @@ import (
 	"net/http"
 	"strings"
 	"time"
-	"tradesignal-backend/pkg/interfacepkg"
 
 	"github.com/dgrijalva/jwt-go"
 )

@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"tradesignal-backend/usecase"
+	"dew-backend/usecase"
 )
 
 // LimitInit ...

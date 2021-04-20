@@ -2,34 +2,23 @@ package usecase
 
 import (
 	"database/sql"
+	"dew-backend/pkg/aes"
+	"dew-backend/pkg/aesfront"
+	queue "dew-backend/pkg/amqp"
+	"dew-backend/pkg/jwe"
+	"dew-backend/pkg/jwt"
+	"dew-backend/pkg/logruslogger"
+	"dew-backend/pkg/messages"
+	"dew-backend/pkg/str"
+	"dew-backend/usecase/viewmodel"
 	"encoding/json"
 	"errors"
 	"math/rand"
 	"strings"
 	"time"
-	"tradesignal-backend/pkg/aes"
-	"tradesignal-backend/pkg/aesfront"
-	"tradesignal-backend/pkg/aesmansek"
-	queue "tradesignal-backend/pkg/amqp"
-	"tradesignal-backend/pkg/aws"
-	"tradesignal-backend/pkg/fcm"
-	"tradesignal-backend/pkg/jwe"
-	"tradesignal-backend/pkg/jwt"
-	"tradesignal-backend/pkg/logruslogger"
-	"tradesignal-backend/pkg/mail"
-	"tradesignal-backend/pkg/mailing"
-	"tradesignal-backend/pkg/mandrill"
-	"tradesignal-backend/pkg/mansekum"
-	"tradesignal-backend/pkg/messages"
-	"tradesignal-backend/pkg/pusher"
-	"tradesignal-backend/pkg/recaptcha"
-	"tradesignal-backend/pkg/str"
-	twilioHelper "tradesignal-backend/pkg/twilio"
-	"tradesignal-backend/usecase/viewmodel"
 
-	"tradesignal-backend/pkg/redis"
+	"dew-backend/pkg/redis"
 
-	"cloud.google.com/go/firestore"
 	ut "github.com/go-playground/universal-translator"
 	validator "github.com/go-playground/validator/v10"
 	jwtFiber "github.com/gofiber/jwt/v2"
@@ -58,34 +47,22 @@ var (
 
 // ContractUC ...
 type ContractUC struct {
-	ReqID        string
-	UserID       string
-	EnvConfig    map[string]string
-	DB           *sql.DB
-	DBMS         *sql.DB
-	TX           *sql.Tx
-	Aes          aes.Credential
-	AesMansek    aesmansek.Credential
-	AesFront     aesfront.Credential
-	AmqpConn     *amqp.Connection
-	AmqpChannel  *amqp.Channel
-	RedisClient  redis.RedisClient
-	JweCred      jwe.Credential
-	Validate     *validator.Validate
-	Translator   ut.Translator
-	JwtCred      jwt.Credential
-	JwtConfig    jwtFiber.Config
-	AWSS3        aws.AWSS3
-	Pusher       pusher.Credential
-	Mailing      mailing.GoMailConfig
-	Fcm          fcm.Connection
-	TwilioClient *twilioHelper.Client
-	Mandrill     mandrill.Credential
-	Minio        *minio.Client
-	Firestore    *firestore.Client
-	Recaptcha    recaptcha.Credential
-	Mail         mail.Connection
-	Mansekum     mansekum.Credential
+	ReqID       string
+	UserID      string
+	EnvConfig   map[string]string
+	DB          *sql.DB
+	TX          *sql.Tx
+	Aes         aes.Credential
+	AesFront    aesfront.Credential
+	AmqpConn    *amqp.Connection
+	AmqpChannel *amqp.Channel
+	RedisClient redis.RedisClient
+	JweCred     jwe.Credential
+	Validate    *validator.Validate
+	Translator  ut.Translator
+	JwtCred     jwt.Credential
+	JwtConfig   jwtFiber.Config
+	Minio       *minio.Client
 }
 
 func (uc ContractUC) setPaginationParameter(page, limit int, orderBy, sort string, orderByWhiteLists, orderByStringWhiteLists []string) (int, int, int, string, string) {

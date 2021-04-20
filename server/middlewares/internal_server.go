@@ -1,9 +1,9 @@
 package middlewares
 
 import (
-	"tradesignal-backend/pkg/functioncaller"
-	"tradesignal-backend/pkg/logruslogger"
-	"tradesignal-backend/usecase/viewmodel"
+	"dew-backend/pkg/functioncaller"
+	"dew-backend/pkg/logruslogger"
+	"dew-backend/usecase/viewmodel"
 
 	"github.com/gofiber/fiber/v2"
 )

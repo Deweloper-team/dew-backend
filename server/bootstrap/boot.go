@@ -1,7 +1,7 @@
 package bootstrap
 
 import (
-	"tradesignal-backend/usecase"
+	"dew-backend/usecase"
 
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"

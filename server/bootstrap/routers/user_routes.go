@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"tradesignal-backend/server/handlers"
-	"tradesignal-backend/server/middlewares"
+	"dew-backend/server/handlers"
+	"dew-backend/server/middlewares"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -24,5 +24,4 @@ func (route UserRoutes) RegisterRoute() {
 
 	test := route.RouterGroup.Group("/api/test")
 	test.Use(jwtMiddleware.VerifyBasic)
-	test.Get("/mail", handler.TestMail)
 }

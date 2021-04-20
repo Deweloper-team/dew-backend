@@ -8,4 +8,5 @@ type JwtVM struct {
 	RefreshExpiredDate string `json:"refresh_expired_date"`
 	LatestAction       string `json:"latest_action"`
 	UserID             string `json:"user_id"`
+	Role               string `json:"role"`
 }

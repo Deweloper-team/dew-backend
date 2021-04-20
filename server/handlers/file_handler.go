@@ -2,12 +2,12 @@ package handlers
 
 import (
 	"context"
+	"dew-backend/db/repository/models"
+	"dew-backend/helper"
+	"dew-backend/pkg/str"
+	"dew-backend/usecase"
 	"errors"
 	"time"
-	"tradesignal-backend/db/repository/models"
-	"tradesignal-backend/helper"
-	"tradesignal-backend/pkg/str"
-	"tradesignal-backend/usecase"
 
 	"github.com/gofiber/fiber/v2"
 )

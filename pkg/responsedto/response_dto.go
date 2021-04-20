@@ -1,7 +1,7 @@
 package responsedto
 
 import (
-	"tradesignal-backend/usecase/viewmodel"
+	"dew-backend/usecase/viewmodel"
 )
 
 func ErrorResponse(message interface{}) viewmodel.ResponseErrorVM {

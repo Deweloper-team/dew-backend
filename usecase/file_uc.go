@@ -2,13 +2,13 @@ package usecase
 
 import (
 	"context"
+	"dew-backend/db/repository"
+	"dew-backend/db/repository/models"
+	"dew-backend/pkg/logruslogger"
+	"dew-backend/pkg/str"
+	"dew-backend/usecase/viewmodel"
 	"mime/multipart"
 	"time"
-	"tradesignal-backend/db/repository"
-	"tradesignal-backend/db/repository/models"
-	"tradesignal-backend/pkg/logruslogger"
-	"tradesignal-backend/pkg/str"
-	"tradesignal-backend/usecase/viewmodel"
 )
 
 // FileUC ...

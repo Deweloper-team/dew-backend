@@ -2,49 +2,32 @@ package config
 
 import (
 	"database/sql"
-	"tradesignal-backend/pkg/aes"
-	"tradesignal-backend/pkg/aesfront"
-	"tradesignal-backend/pkg/aesmansek"
-	"tradesignal-backend/pkg/jwe"
-	"tradesignal-backend/pkg/jwt"
-	"tradesignal-backend/pkg/mail"
-	"tradesignal-backend/pkg/mailing"
-	"tradesignal-backend/pkg/mandrill"
-	"tradesignal-backend/pkg/mansekum"
+	"dew-backend/pkg/aes"
+	"dew-backend/pkg/aesfront"
+	"dew-backend/pkg/jwe"
+	"dew-backend/pkg/jwt"
 
-	// miniopkg "tradesignal-backend/pkg/minio"
+	// miniopkg "dew-backend/pkg/minio"
+
+	postgresqlPkg "dew-backend/pkg/postgresql"
+	redisPkg "dew-backend/pkg/redis"
+	"dew-backend/pkg/str"
 	"log"
 	"time"
-	"tradesignal-backend/pkg/mssqldb"
-	postgresqlPkg "tradesignal-backend/pkg/postgresql"
-	"tradesignal-backend/pkg/recaptcha"
-	redisPkg "tradesignal-backend/pkg/redis"
-	"tradesignal-backend/pkg/str"
 
-	"cloud.google.com/go/firestore"
 	"github.com/go-redis/redis/v7"
 	"github.com/joho/godotenv"
-	"github.com/minio/minio-go/v7"
 )
 
 // Configs ...
 type Configs struct {
 	EnvConfig   map[string]string
 	DB          *sql.DB
-	DBMS        *sql.DB
 	RedisClient redisPkg.RedisClient
 	JweCred     jwe.Credential
 	JwtCred     jwt.Credential
 	Aes         aes.Credential
-	AesMansek   aesmansek.Credential
 	AesFront    aesfront.Credential
-	Minio       *minio.Client
-	Firestore   *firestore.Client
-	Mandrill    mandrill.Credential
-	Recaptcha   recaptcha.Credential
-	Mail        mail.Connection
-	Mailing     mailing.GoMailConfig
-	Mansekum    mansekum.Credential
 }
 
 // LoadConfigs ...
@@ -74,20 +57,6 @@ func LoadConfigs() (res Configs, err error) {
 	res.DB.SetMaxIdleConns(dbConn.DBMAxIdleConnection)
 	res.DB.SetConnMaxLifetime(time.Duration(dbConn.DBMaxLifeTimeConnection) * time.Second)
 
-	// SQL server OAO2 DB connection
-	dbmsInfo := mssqldb.Connection{
-		Server:   res.EnvConfig["MSSQL_HOST"],
-		Port:     str.StringToInt(res.EnvConfig["MSSQL_PORT"]),
-		User:     res.EnvConfig["MSSQL_USERNAME"],
-		Password: res.EnvConfig["MSSQL_PASSWORD"],
-		DB:       res.EnvConfig["MSSQL_DB"],
-		Debug:    str.StringToBool(res.EnvConfig["MSSQL_DEBUG"]),
-	}
-	res.DBMS, err = dbmsInfo.Connect()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
 	// redis conn
 	redisOption := &redis.Options{
 		Addr:     res.EnvConfig["REDIS_HOST"],
@@ -115,11 +84,6 @@ func LoadConfigs() (res Configs, err error) {
 		Key: res.EnvConfig["AES_KEY"],
 	}
 
-	// AES Mansek credential
-	res.AesMansek = aesmansek.Credential{
-		Key: res.EnvConfig["AES_MANSEK_KEY"],
-	}
-
 	// aes front
 	res.AesFront = aesfront.Credential{
 		Key: res.EnvConfig["AES_FRONT_KEY"],
@@ -138,40 +102,11 @@ func LoadConfigs() (res Configs, err error) {
 	// 	return res, err
 	// }
 
-	res.Mandrill = mandrill.Credential{
-		Key:      res.EnvConfig["MANDRILL_KEY"],
-		FromMail: res.EnvConfig["MANDRILL_FROM_MAIL"],
-		FromName: res.EnvConfig["MANDRILL_FROM_NAME"],
-	}
-
-	res.Recaptcha = recaptcha.Credential{
-		Secret: res.EnvConfig["RECAPTCHA_SECRET"],
-	}
-
-	res.Mail = mail.Connection{
-		Host:     res.EnvConfig["SMTP_HOST"],
-		Port:     str.StringToInt(res.EnvConfig["SMTP_PORT"]),
-		Username: res.EnvConfig["SMTP_USERNAME"],
-		Password: res.EnvConfig["SMTP_PASSWORD"],
-	}
-
-	res.Mailing = mailing.GoMailConfig{
-		SMTPHost: res.EnvConfig["SMTP_HOST"],
-		SMTPPort: str.StringToInt(res.EnvConfig["SMTP_PORT"]),
-		Sender:   res.EnvConfig["SMTP_FROM"],
-		Username: res.EnvConfig["SMTP_USERNAME"],
-		Password: res.EnvConfig["SMTP_PASSWORD"],
-	}
-
-	res.Mansekum = mansekum.Credential{
-		BaseURL:  res.EnvConfig["MANSEK_UM_BASE_URL"],
-		Username: res.EnvConfig["MANSEK_UM_USERNAME"],
-		Password: res.EnvConfig["MANSEK_UM_PASSWORD"],
-		AppCode:  res.EnvConfig["MANSEK_UM_APP_CODE"],
-		AdminID:  res.EnvConfig["MANSEK_UM_ADMIN_ID"],
-		AdminKey: res.EnvConfig["MANSEK_UM_ADMIN_KEY"],
-		AppID:    res.EnvConfig["MANSEK_UM_APP_ID"],
-	}
+	// res.Mandrill = mandrill.Credential{
+	// 	Key:      res.EnvConfig["MANDRILL_KEY"],
+	// 	FromMail: res.EnvConfig["MANDRILL_FROM_MAIL"],
+	// 	FromName: res.EnvConfig["MANDRILL_FROM_NAME"],
+	// }
 
 	return res, err
 }
